@@ -9,9 +9,19 @@ import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import com.capstone3.GroupAppoint.kakao.auth.entity.User;
+import com.capstone3.GroupAppoint.kakao.auth.repository.UserRepository;
 
 @Service
 public class OAuth2UserService extends DefaultOAuth2UserService {
+
+    private final UserRepository userRepository;
+
+    // 생성자 주입
+    public OAuth2UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(userRequest);
@@ -25,7 +35,17 @@ public class OAuth2UserService extends DefaultOAuth2UserService {
                 .getUserInfoEndpoint()
                 .getUserNameAttributeName();
 
-        // DB 저장로직이 필요하면 추가
+        // OAuth 응답에서 ID 가져오기
+        String id = oAuth2User.getAttribute("id");
+        String email = oAuth2User.getAttribute("email");
+        String name = oAuth2User.getAttribute("name");
+
+        // DB에 사용자 저장
+        User user = userRepository.findById(Long.parseLong(id)).orElse(null); // 이메일로 사용자 검색
+        if (user == null) {
+            user = new User(name, email); // 새로운 사용자 생성
+            userRepository.save(user);   // DB에 저장
+        }
 
         return new DefaultOAuth2User(authorities, oAuth2User.getAttributes(), userNameAttributeName);
     }
