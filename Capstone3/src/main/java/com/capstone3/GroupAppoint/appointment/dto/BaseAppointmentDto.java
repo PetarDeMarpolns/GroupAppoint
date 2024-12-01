@@ -2,6 +2,7 @@ package com.capstone3.GroupAppoint.appointment.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -9,10 +10,10 @@ import java.time.LocalTime;
 @Setter
 
 public abstract class BaseAppointmentDto {
-    private Integer appointmentId;  //약속 ID
+    private Long appointmentId;  //약속 ID
     private String title;           //약속명
-    private LocalDate planDate;     //약속일
-    private LocalTime planTime;     //약속시간
+    private LocalDate appointmentDate;     //약속일
+    private LocalTime appointmentTime;     //약속시간
     private Double latitude;        //위도
     private Double longitude;       //경도
     private String location;        //위치

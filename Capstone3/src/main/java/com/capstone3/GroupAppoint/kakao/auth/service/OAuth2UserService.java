@@ -12,6 +12,7 @@ import java.util.List;
 import com.capstone3.GroupAppoint.kakao.auth.entity.User;
 import com.capstone3.GroupAppoint.kakao.auth.repository.UserRepository;
 
+
 @Service
 public class OAuth2UserService extends DefaultOAuth2UserService {
 
@@ -41,10 +42,11 @@ public class OAuth2UserService extends DefaultOAuth2UserService {
         String name = oAuth2User.getAttribute("name");
 
         // DB에 사용자 저장
-        User user = userRepository.findById(Long.parseLong(id)).orElse(null); // 이메일로 사용자 검색
+        User user;
+        user = userRepository.findById(Long.parseLong(id)).orElse(null); // 사용자 조회
         if (user == null) {
-            user = new User(name, email); // 새로운 사용자 생성
-            userRepository.save(user);   // DB에 저장
+            user = new User(name, email); // 사용자 생성
+            userRepository.save(user);    // DB에 저장
         }
 
         return new DefaultOAuth2User(authorities, oAuth2User.getAttributes(), userNameAttributeName);

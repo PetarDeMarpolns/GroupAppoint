@@ -1,10 +1,15 @@
 package com.capstone3.GroupAppoint.appointment.dto;
 
+import lombok.*;
+
 import java.util.List;
 
-
-
-public class EndAppointmentDto {
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class EndAppointmentDto extends BaseAppointmentDto{
     private MyEndAppointmentDto myDetail;
-    private List<EndParticipantDto> endPlanParticipantDto;
+    private List<EndParticipantDto> EndParticipantDto;
 }

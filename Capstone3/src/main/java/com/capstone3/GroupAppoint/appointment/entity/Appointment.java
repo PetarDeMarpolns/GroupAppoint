@@ -1,9 +1,9 @@
 package com.capstone3.GroupAppoint.appointment.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
-import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -18,16 +18,16 @@ public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "appointment_id")
-    private Integer appointmentId;
+    private Long appointmentId;
 
     @Column(name = "title")
     private String title;
 
-    @Column(name = "plan_date")
-    private LocalDate planDate;
+    @Column(name = "appointment_date")
+    private LocalDate appointmentDate;
 
-    @Column(name = "plan_time")
-    private LocalTime planTime;
+    @Column(name = "appointment_time")
+    private LocalTime appointmentTime;
 
     // 위도
     @Column(name = "latitude")
