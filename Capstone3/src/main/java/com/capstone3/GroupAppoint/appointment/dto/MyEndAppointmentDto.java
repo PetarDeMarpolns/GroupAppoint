@@ -1,13 +1,14 @@
 package com.capstone3.GroupAppoint.appointment.dto;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalTime;
 
 @Getter
 @Setter
 public class MyEndAppointmentDto {
-    private Integer userId;
+    private Long userId;
     private String profile;
     private Boolean isOnTime;
     private LocalTime arrivalTime;     //도착 시간
