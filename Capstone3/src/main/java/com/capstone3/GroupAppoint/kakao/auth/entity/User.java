@@ -31,6 +31,9 @@ public class User {
     @ColumnDefault("0")
     private int accumulatedTime;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Friend> friends;
+
     public User(String name, String email) {
         this.name = name;
         this.email = email;
