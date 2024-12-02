@@ -18,6 +18,7 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -58,6 +59,10 @@ public class AppointmentServiceImpl implements AppointmentService {
                     continue;
                 }
                 User participant = userService.findByUserId(Long.valueOf(participantId));
+                if (participant == null) {
+                    log.error("Participant with userId {} not found.", participantId);
+                    continue;  // 참가자가 존재하지 않으면 건너뛰기
+                }
                 participantService.addParticipant(participant, appointment, false);
             }
         }

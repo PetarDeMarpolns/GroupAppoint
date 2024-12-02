@@ -13,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -36,7 +38,10 @@ public class AppointmentController {
             HttpServletRequest request,
             @RequestBody CreateAppointmentDto createAppointmentDto
     ) {
+
         // 인증된 사용자 ID 가져오기 (테스트용 userId 설정)
+        //String userIdString = request.getRemoteUser();
+        //Long userId = Long.parseLong(userIdString);
         Long userId = 1L;
 
         try {
@@ -252,11 +257,11 @@ public class AppointmentController {
     @GetMapping
     public ResponseEntity<List<AppointmentListDto>> getAppointmentListByState(
             HttpServletRequest request,
-            @RequestParam("state") int state,
-            @RequestParam("userId") long userId
+            @RequestParam("state") int state
     ){
         //String userIdString = request.getRemoteUser();
         //Long userId = Long.parseLong(userIdString);
+        Long userId = 1L;
 
         List<AppointmentListDto> appointmentList;
         try {
@@ -277,7 +282,7 @@ public class AppointmentController {
 
         //String userIdString = request.getRemoteUser();
         //Long userId = Long.parseLong(userIdString);
-        Long userId = 2L;
+        Long userId = 1L;
         List<AppointmentListDto> appointmentListDto = appointmentService.getAppointmentList(userId, planDate);
         return new ResponseEntity<>(appointmentListDto, HttpStatus.OK);
     }
