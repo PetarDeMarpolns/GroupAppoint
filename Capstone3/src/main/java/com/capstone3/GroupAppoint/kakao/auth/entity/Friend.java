@@ -1,4 +1,9 @@
+package com.capstone3.GroupAppoint.kakao.auth.entity;
+
 import jakarta.persistence.*;
+import lombok.*;
+import lombok.extern.slf4j.Slf4j;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Table(name = "friend")
@@ -15,6 +20,8 @@ public class Friend {
     @Column(nullable = false)
     private String friendName;
 
-    public Friend() {
+    public Friend(User user, String friendName) {
+        this.user = user;
+        this.friendName = friendName;
     }
 }
