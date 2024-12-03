@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.List;
+
 import org.hibernate.annotations.ColumnDefault;
 
 @Slf4j
